@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+/* eslint-disable no-unused-vars */
+//@ts-check
+import { lazy, Suspense } from "react";
+import {
+    Routes,
+    Route
+} from "react-router-dom";
 
-function App() {
+// PAGES
+const UseRef = lazy(() => import("./pages/useRef/index"));
+const LoadingPage = lazy(() => import("./pages/shared/loading/index"));
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<LoadingPage />}>
+    <Routes>
+      <Route path="/use-ref" element={<UseRef />} />
+    </Routes>
+</Suspense>
   );
 }
-
-export default App;
